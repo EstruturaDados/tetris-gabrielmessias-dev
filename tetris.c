@@ -115,6 +115,10 @@ void inicializarFila(Fila *f, int *contadorId) {
 }
 
 void enqueue(Fila *f, Peca p) {
+    if (filaCheia(f)) {
+        return; // NÃO insere se estiver cheia
+    }
+
     f->fim = (f->fim + 1) % TAM_FILA;
     f->fila[f->fim] = p;
     f->total++;
@@ -125,6 +129,10 @@ Peca dequeue(Fila *f) {
     f->inicio = (f->inicio + 1) % TAM_FILA;
     f->total--;
     return removida;
+}
+
+int filaCheia(Fila *f) {
+    return f->total == TAM_FILA;
 }
 
 // PILHA
